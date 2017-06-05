@@ -1,0 +1,15 @@
+project(wayland_egl)
+
+find_package(GLEW REQUIRED)
+find_package(OpenGL REQUIRED)
+find_package(EGL REQUIRED)
+find_package(Wayland REQUIRED)
+find_package(WaylandEGL REQUIRED)
+
+message(STATUS "EGL_INCLUDE_DIR ${EGL_INCLUDE_DIRS}")
+message(STATUS "EGL_LIBRARY ${EGL_LIBRARIES}")
+
+set(SOURCE_FILES main.cpp)
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+target_include_directories(${PROJECT_NAME} PRIVATE ${EGL_INCLUDE_DIRS} ${WAYLAND_CLIENT_INCLUDE_DIR} ${WAYLAND_EGL_INCLUDE_DIR})
+target_link_libraries(${PROJECT_NAME} ${GLEW_LIBRARY} ${OPENGL_LIBRARY} ${EGL_LIBRARIES} ${WAYLAND_CLIENT_LIBRARIES} ${WAYLAND_EGL_LIBRARIES})
